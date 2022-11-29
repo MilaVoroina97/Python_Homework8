@@ -61,7 +61,7 @@ def send_random_photo(message):
         keyboard.add(like_button)
         dislike_button = types.InlineKeyboardButton(text='👎',callback_data='dislike')
         keyboard.add(dislike_button)
-        bot.send_photo(message.from_user.id,image,reply_markup=keyboard)
+        bot.send_photo(message.from_user.id,image,caption = 'Вам нравится это фото?',reply_markup=keyboard)
 
 @bot.callback_query_handler(func=lambda call: True)
 def callback_inline(call):
@@ -84,7 +84,7 @@ def send_random_people(message):
         keyboard.add(like_button)
         dislike_button = types.InlineKeyboardButton(text='👎',callback_data='dislike')
         keyboard.add(dislike_button)
-        bot.send_photo(message.from_user.id,image,reply_markup=keyboard)
+        bot.send_photo(message.from_user.id,image,caption = 'Вам нравится это фото?',reply_markup=keyboard)
             
 @bot.callback_query_handler(func=lambda call: True)
 def callback_inline(call):
