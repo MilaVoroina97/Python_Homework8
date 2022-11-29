@@ -15,7 +15,7 @@ def parsing(url):
     return [i.text for i in anecdots]
 
 jokes = parsing(URL)
-# random.shuffle(jokes)
+
 
 bot = TeleBot(API_TOKEN)
 @bot.message_handler(commands=['start'])
@@ -63,6 +63,17 @@ def send_random_photo(message):
         keyboard.add(dislike_button)
         bot.send_photo(message.from_user.id,image,reply_markup=keyboard)
 
+@bot.callback_query_handler(func=lambda call: True)
+def callback_inline(call):
+    likes = 15
+    dislikes = 8
+    if call.data == 'like':
+        likes += 1
+        bot.send_message(call.message.chat.id,f'Еще {likes} людям понравилось это фото' )
+    elif call.data == 'dislike':
+        dislikes += 1
+        bot.send_message(call.message.chat.id,f'Еще {dislikes} людям не понравилось это фото' )
+
 
 @bot.message_handler(commands=['random_people'])
 def send_random_people(message):
@@ -74,27 +85,16 @@ def send_random_people(message):
         dislike_button = types.InlineKeyboardButton(text='👎',callback_data='dislike')
         keyboard.add(dislike_button)
         bot.send_photo(message.from_user.id,image,reply_markup=keyboard)
-    
-def get_likes_and_dislikes(message):
-    query = message.data
+            
+@bot.callback_query_handler(func=lambda call: True)
+def callback_inline(call):
+    likes = 10
+    dislikes = 6
+    if call.data == 'like':
+        likes += 1
+        bot.send_message(call.message.chat.id,f'Еще {likes} людям понравилось это фото' )
+    elif call.data == 'dislike':
+        dislikes += 1
+        bot.send_message(call.message.chat.id,f'Еще {dislikes} людям не понравилось это фото' )
 
 bot.polling()
-
-# @bot.message_handler(content_types=['text'])
-# def get_user_text(message):
-#     if message.text.lower() == 'привет':
-#         bot.send_message(message.chat.id,'Доброго дня!',parse_mode='html')
-#     elif 'фото' in message.text:
-#         photo = open('kotik.jpg','rb')
-#         bot.send_photo(message.chat.id,photo)
-#     elif message.text.lower() in '123456789':
-#         bot.send_message(message.chat.id,jokes[0])
-#         del jokes[0]
-#     else:
-#         bot.send_message(message.chat.id,'Я тебя не понимаю',parse_mode='html')
-
-
-# @bot.message_handler(content_types=['photo'])#когда мы не знаем, какую команду введет пользователь
-# def get_photo(message):
-#     bot.send_message(message.chat.id,'Отличное фото!')
-
