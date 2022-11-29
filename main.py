@@ -50,7 +50,7 @@ def give_jokes(message):
 @bot.message_handler(commands=['photo'])
 def give_photo(message):
     photo = open('kotik.jpg','rb')
-    bot.send_photo(message.chat.id,photo)
+    bot.send_photo(message.chat.id,photo,caption = 'Улыбнитесь:) на Вас смотрит милый котик')
 
 @bot.message_handler(commands=['random_photo'])
 def send_random_photo(message):
