@@ -69,10 +69,10 @@ def callback_inline(call):
     dislikes = 0
     with open('like.txt','r') as file:
         for line in file:
-            likes = int(line[0].rstrip())
+            likes = int(line.rstrip())
     with open('dislike.txt','r') as data:
         for lines in data:
-            dislikes = int(lines[0].rstrip())
+            dislikes = int(lines.rstrip())
     if call.data == 'like':
         likes += 1
         doc = open('like.txt','w')
@@ -102,10 +102,10 @@ def callback_inline(call):
     dislikes = 0
     with open('like.txt','r') as file:
         for line in file:
-            likes = int(line[0].rstrip())
+            likes = int(line.rstrip())
     with open('dislike.txt','r') as data:
         for lines in data:
-            dislikes = int(lines[0].rstrip())
+            dislikes = int(lines.rstrip())
     if call.data == 'like':
         likes += 1
         doc = open('like.txt','w')
