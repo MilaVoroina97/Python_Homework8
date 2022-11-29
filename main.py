@@ -65,13 +65,23 @@ def send_random_photo(message):
 
 @bot.callback_query_handler(func=lambda call: True)
 def callback_inline(call):
-    likes = 15
-    dislikes = 8
+    likes = 0
+    dislikes = 0
+    with open('like.txt','r') as file:
+        for line in file:
+            likes = int(line[0].rstrip())
+    with open('dislike.txt','r') as data:
+        for lines in data:
+            dislikes = int(lines[0].rstrip())
     if call.data == 'like':
         likes += 1
+        doc = open('like.txt','w')
+        doc.write(str(likes))
         bot.send_message(call.message.chat.id,f'Еще {likes} людям понравилось это фото' )
     elif call.data == 'dislike':
         dislikes += 1
+        doc1 = open('dislike.txt','w')
+        doc1.write(str(dislikes))
         bot.send_message(call.message.chat.id,f'Еще {dislikes} людям не понравилось это фото' )
 
 
@@ -88,13 +98,22 @@ def send_random_people(message):
             
 @bot.callback_query_handler(func=lambda call: True)
 def callback_inline(call):
-    likes = 10
-    dislikes = 6
+    likes = 0
+    dislikes = 0
+    with open('like.txt','r') as file:
+        for line in file:
+            likes = int(line[0].rstrip())
+    with open('dislike.txt','r') as data:
+        for lines in data:
+            dislikes = int(lines[0].rstrip())
     if call.data == 'like':
         likes += 1
+        doc = open('like.txt','w')
+        doc.write(str(likes))
         bot.send_message(call.message.chat.id,f'Еще {likes} людям понравилось это фото' )
     elif call.data == 'dislike':
         dislikes += 1
+        doc1 = open('dislike.txt','w')
+        doc1.write(str(dislikes))
         bot.send_message(call.message.chat.id,f'Еще {dislikes} людям не понравилось это фото' )
-
 bot.polling()
